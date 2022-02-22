@@ -12,5 +12,6 @@ router
   .get(blogController.getBlogById)
   .patch(blogController.updateBlogById)
   .delete(blogController.deleteBlogById);
+  router.get('/category/:id', blogController.getBlogsByCategory);
 
 module.exports = router;

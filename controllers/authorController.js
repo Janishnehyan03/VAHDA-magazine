@@ -5,6 +5,10 @@ exports.createAuthor = async (req, res) => {
     return res.status(400).json({
       message: "Please provide author name",
     });
+  }else if (!req.body.description) {
+    return res.status(400).json({
+      message: "Please provide author description",
+    });
   }
   try {
     const author = await Author.create(req.body);

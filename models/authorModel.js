@@ -14,6 +14,10 @@ const authorSchema = new mongoose.Schema(
     twitterProfile: {
       type: String,
     },
+    description: {
+      type: String,
+      required: [true, "Description is required"],
+    },
   },
   {
     timestamps: true,

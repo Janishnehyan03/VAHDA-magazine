@@ -4,17 +4,31 @@ import Axios from "../../Axios";
 import axios from "axios";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function AddBlog() {
+function EditBlog() {
+  const { id } = useParams();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [author, setAuthor] = useState("");
-  const [authors, setAuthors] = useState("");
+  const [authors, setAuthors] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
+
+  const getPost = async () => {
+    const { data } = await Axios.get(`/blogs/${id}`);
+    if (data.success) {
+      setTitle(data.blog.title);
+      setContent(data.blog.content);
+      setCategory(data.blog.category);
+      setAuthor(data.blog.author);
+      setImage(data.blog.image);
+    }
+  };
 
   const getAllCategories = async () => {
     try {
@@ -63,7 +77,7 @@ function AddBlog() {
     let imageResponse = await sendToCloudinary(e);
     if (imageResponse) {
       try {
-        let res = await Axios.post("/blogs", {
+        let res = await Axios.patch(`/blogs/${id}`, {
           title,
           content,
           image: imageResponse,
@@ -76,7 +90,7 @@ function AddBlog() {
           setContent("");
           setTitle("");
           setImage(null);
-          toast.success(`${title} created successfully`, {
+          toast.success(`edited successfully`, {
             position: "top-center",
             autoClose: 2000,
           });
@@ -92,6 +106,7 @@ function AddBlog() {
     }
   };
   useEffect(() => {
+    getPost();
     getAllCategories();
     getAllAuthors();
   }, []);
@@ -101,7 +116,7 @@ function AddBlog() {
       <div className="mt-10 sm:mt-0">
         <div className="md:grid grid-cols-1">
           <h1 className="text-2xl font-bold text-gray-800 text-center">
-            create post
+            Edit post
           </h1>
           <div className="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
@@ -134,7 +149,6 @@ function AddBlog() {
                       </label>
                       <select
                         onChange={(e) => setCategory(e.target.value)}
-                        value={category}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option
@@ -166,7 +180,6 @@ function AddBlog() {
                       </label>
                       <select
                         onChange={(e) => setAuthor(e.target.value)}
-                        value={author}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option
@@ -263,4 +276,4 @@ function AddBlog() {
   );
 }
 
-export default AddBlog;
+export default EditBlog;

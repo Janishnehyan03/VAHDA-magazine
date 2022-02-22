@@ -8,6 +8,7 @@ function AddAuthor() {
   const [name, setname] = useState("");
   const [facebookProfile, setFacebookProfile] = useState("");
   const [twitterProfile, setTwitterProfile] = useState("");
+  const [description, setDescription] = useState("");
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,9 +51,14 @@ function AddAuthor() {
         name,
         facebookProfile,
         twitterProfile,
+        description,
       });
       if (res.data.success) {
         setLoading(false);
+        setname("");
+        setFacebookProfile("");
+        setTwitterProfile("");
+        setDescription("");
         getAllAuthors();
         toast.success(`${name} created successfully`, {
           position: "top-center",
@@ -96,6 +102,23 @@ function AddAuthor() {
                         onChange={(e) => setname(e.target.value)}
                         required
                         value={name}
+                        id="first-name"
+                        autoComplete="given-name"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Description
+                      </label>
+                      <input
+                        type="text"
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        value={description}
                         id="first-name"
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

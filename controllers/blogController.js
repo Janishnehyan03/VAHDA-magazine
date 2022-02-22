@@ -1,16 +1,18 @@
 const Blog = require("../models/blogModel");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 exports.createBlog = async (req, res) => {
-  if (
-    !req.body.title ||
-    !req.body.content ||
-    !req.body.category ||
-    !req.body.author ||
-    !req.body.image
-  ) {
-    return res.status(400).json({
-      message: "Please provide title, content, category, author and image",
-    });
+  let message;
+  if (!req.body.title) {
+    message = "Title is required";
+  } else if (!req.body.content) {
+    message = "Content is required";
+  } else if (!req.body.category) {
+    message = "Category is required";
+  } else if (!req.body.author) {
+    message = "Please provide author";
+  } else if (!req.body.image) {
+    message = "Please provide image";
   }
   try {
     const blog = await Blog.create(req.body);
@@ -27,6 +29,7 @@ exports.createBlog = async (req, res) => {
     res.status(400).json({
       error,
       success: false,
+      message,
     });
   }
 };
@@ -53,7 +56,7 @@ exports.getAllBlogs = async (req, res) => {
 
 exports.getBlogById = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findById(req.params.id).populate("author", "name").populate('category', 'name');
     res.status(200).json({
       blog,
       success: true,
@@ -88,6 +91,23 @@ exports.deleteBlogById = async (req, res) => {
     const blog = await Blog.findByIdAndDelete(req.params.id);
     res.status(200).json({
       blog,
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+      success: false,
+    });
+  }
+};
+
+exports.getBlogsByCategory = async (req, res) => {
+  try {
+    const blogs = await Blog.find({
+      category: ObjectId(req.params.id),
+    }).populate("author", "name");
+    res.status(200).json({
+      blogs,
       success: true,
     });
   } catch (error) {

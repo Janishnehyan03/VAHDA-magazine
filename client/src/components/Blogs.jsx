@@ -2,12 +2,12 @@ import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Axios from "../Axios";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(blogs);
 
   const getBlogs = async () => {
     setLoading(true);
@@ -33,30 +33,16 @@ function Blogs() {
       ) : (
         <>
           {blogs.map((blog, index) => (
-            <div className="rounded overflow-hidden shadow-lg sm:relative md:relative">
+            <Link
+              to={`/post/${blog._id}`}
+              key={index}
+              className="rounded overflow-hidden shadow-lg sm:relative md:relative"
+            >
               <img
-                className="w-full"
-                src="https://picsum.photos/600/400/?random"
-                alt="Mountain"
+                className="w-full h-64 object-cover object-center"
+                src={blog.image}
+                alt="content"
               />
-              {/* author name on left of card */}
-              <div class="px-6 pt-4 pb-2">
-                {blog.author && (
-                  <span class="inline-block text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    {blog.author.name}
-                  </span>
-                )}
-              </div>
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  {blog.title}
-                </div>
-                <p className="text-gray-700">
-                  {blog.content.length > 100
-                    ? blog.content.substring(0, 100) + "  ..."
-                    : blog.content}
-                </p>
-              </div>
               <div class="px-6 pt-4 pb-2">
                 {blog.category && (
                   <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -64,7 +50,29 @@ function Blogs() {
                   </span>
                 )}
               </div>
-            </div>
+
+              <div className="px-6 py-4">
+                <div className="text-xl mb-2 text-center font-semibold text-gray-600">
+                  {blog.title.length > 100
+                    ? blog.title.substring(0, 100) + "  ..."
+                    : blog.title}
+                </div>
+                <p className="text-gray-700">
+                  {blog.content.length > 100
+                    ? blog.content.substring(0, 100) + "  ..."
+                    : blog.content}
+                </p>
+              </div>
+
+              {/* author name on left of card */}
+              <div class="px-6 pt-4 pb-2">
+                {blog.author && (
+                  <span class="inline-block text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    ✒️ {blog.author.name}
+                  </span>
+                )}
+              </div>
+            </Link>
           ))}
         </>
       )}

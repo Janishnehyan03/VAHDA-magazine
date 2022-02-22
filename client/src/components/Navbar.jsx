@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import Axios from "../Axios";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const getCategories = async () => {
+    let { data } = await Axios.get("/categories");
+    setCategories(data.categories);
+  };
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <div>
       <nav className="bg-gray-800">
@@ -11,12 +20,13 @@ function Nav() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Link to={"/"}>
-                <div className="flex-shrink-0">
+                <div className="flex">
                   <img
                     className="h-8 w-8"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="Workflow"
                   />
+                <h1 className="text-2xl font-bold mx-4 text-white">VAHDA</h1>
                 </div>
               </Link>
               <div className="hidden md:block">
@@ -28,26 +38,15 @@ function Nav() {
                     Dashboard
                   </Link>
 
-                  <Link
-                    to={"/poems"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Poems
-                  </Link>
-
-                  <Link
-                    to={"/stories"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Stories
-                  </Link>
-
-                  <Link
-                    to={"/articles"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Articles
-                  </Link>
+                  {categories.map((category) => (
+                    <Link
+                      to={"/category/" + category._id}
+                      key={category._id}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
                 </div>
                 <Link
                   to={"/login"}
@@ -127,33 +126,15 @@ function Nav() {
                   Dashboard
                 </Link>
 
-                <Link
-                  to={"/poems"}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Poems
-                </Link>
-
-                <Link
-                  to={"/stories"}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Stories
-                </Link>
-
-                <Link
-                  to={"/articles"}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Articles
-                </Link>
-
-                <Link
-                  to={"/audios"}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Audios
-                </Link>
+                {categories.map((category) => (
+                  <Link
+                    to={`/category/${category._id}`}
+                    key={category._id}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
                 <Link
                   to={"/login"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium bg-blue-600"

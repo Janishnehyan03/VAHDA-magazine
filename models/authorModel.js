@@ -14,17 +14,6 @@ const authorSchema = new mongoose.Schema(
     twitterProfile: {
       type: String,
     },
-    instagramProfile: {
-      type: String,
-    },
-    linkedinProfile: {
-      type: String,
-    },
-    others: [
-      {
-        type: String,
-      },
-    ],
   },
   {
     timestamps: true,

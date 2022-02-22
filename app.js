@@ -25,19 +25,26 @@ mongoose.connect(process.env.MONGO_URI, (err, res) => {
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 app.use("/api/v1/blogs", blogRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/authors", authorRoute);
 
-app.use((err, req, res, next) => {
-  console.log('error', err);
-});
+if (process.env.NODE_ENV === "production") {
+  // send file from build folder
+  app.use(express.static("client/build"));
+  // send index.html file
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

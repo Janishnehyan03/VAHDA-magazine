@@ -7,6 +7,10 @@ const categorySchema = new mongoose.Schema(
       unique: [true, "This category already exists"],
       lowercase: true,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -4,7 +4,7 @@ const Category = require("../models/categoryModel");
 exports.createCategory = async (req, res, next) => {
   if (!req.body.name) {
     return res.status(400).json({
-      error: "Please provide category name",
+      message: "Please provide category name",
     });
   }
   try {
@@ -16,7 +16,7 @@ exports.createCategory = async (req, res, next) => {
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({
-        error: `Category with name ${req.body.name} already exists`,
+        message: `Category with name ${req.body.name} already exists`,
       });
     }
     res.status(400).json({

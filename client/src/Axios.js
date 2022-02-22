@@ -7,7 +7,6 @@ const Axios = axios.create({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Methods": "*",
-    // authorization: `Bearer ${token}`,
   },
   withCredentials: true,
 });

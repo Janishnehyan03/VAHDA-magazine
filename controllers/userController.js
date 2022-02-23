@@ -94,3 +94,53 @@ exports.verifyToken = async (req, res, next) => {
     });
   }
 };
+
+exports.checkLoggedIn = async (req, res) => {
+  try {
+    if (!req.cookies.jwt) {
+      return res.status(401).json({
+        error: "No token provided",
+      });
+    }
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    let user = await User.findById(decoded._id);
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid token",
+      });
+    }
+    res.status(200).json({
+      user,
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
+};
+
+exports.logout = async (req, res) => {
+  try {
+    if (!req.cookies.jwt) {
+      return res.status(401).json({
+        error: "No token provided",
+      });
+    }
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    let user = await User.findById(decoded._id);
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid token",
+      });
+    }
+    res.clearCookie("jwt");
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
+};

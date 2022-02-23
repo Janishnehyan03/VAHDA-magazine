@@ -12,7 +12,7 @@ function Blogs() {
   const getBlogs = async () => {
     setLoading(true);
     try {
-      let res = await Axios.get("/blogs");
+      let res = await Axios.get("/blogs?random=true");
       if (res.data.success) {
         setBlogs(res.data.blogs);
         setLoading(false);
@@ -45,9 +45,11 @@ function Blogs() {
               />
               <div class="px-6 pt-4 pb-2">
                 {blog.category && (
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    {blog.category.name}
-                  </span>
+                  <Link to={`/category/${blog.category._id}`}>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      {blog.category.name}
+                    </span>
+                  </Link>
                 )}
               </div>
 

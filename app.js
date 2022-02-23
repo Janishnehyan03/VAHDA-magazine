@@ -10,6 +10,7 @@ const userRoute = require("./routes/user");
 const categoryRoute = require("./routes/category");
 const authorRoute = require("./routes/author");
 const morgan = require("morgan");
+const path = require("path");
 
 dotenv.config();
 // database connection
@@ -31,11 +32,11 @@ app.use(
     credentials: true,
   })
 );
-
 app.use("/api/v1/blogs", blogRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/authors", authorRoute);
+
 
 if (process.env.NODE_ENV === "production") {
   // send file from build folder

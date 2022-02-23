@@ -15,6 +15,7 @@ function AddBlog() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
+  const [showAuthorInput, setShowAuthorInput] = useState(false);
 
   const getAllCategories = async () => {
     try {
@@ -164,10 +165,54 @@ function AddBlog() {
                       >
                         Author Name
                       </label>
+                      {showAuthorInput === "true" ? (
+                        <input
+                          type="text"
+                          onChange={(e) => setAuthor(e.target.value)}
+                          required
+                          value={author}
+                          id="first-name"
+                          autoComplete="given-name"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      ) : (
+                        <select
+                          onChange={(e) => setAuthor(e.target.value)}
+                          value={author}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        >
+                          <option
+                            value=""
+                            disabled
+                            selected
+                            hidden
+                            className="text-gray-600"
+                          >
+                            Select Author
+                          </option>
+                          {authors &&
+                            authors.map((author) => (
+                              <option
+                                className="text-gray-600 w-full py-4"
+                                value={author._id}
+                              >
+                                {author.name}
+                              </option>
+                            ))}
+                        </select>
+                      )}
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        select author type
+                      </label>
                       <select
-                        onChange={(e) => setAuthor(e.target.value)}
-                        value={author}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) => setShowAuthorInput(e.target.value)}
+                        value={showAuthorInput}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-500 text-white"
                       >
                         <option
                           value=""
@@ -176,17 +221,20 @@ function AddBlog() {
                           hidden
                           className="text-gray-600"
                         >
+                          Select Author Type
+                        </option>
+                        <option
+                          className="text-gray-600 w-full py-4"
+                          value={true}
+                        >
+                          Create New Author
+                        </option>
+                        <option
+                          className="text-gray-600 w-full py-4"
+                          value={false}
+                        >
                           Select Author
                         </option>
-                        {authors &&
-                          authors.map((author) => (
-                            <option
-                              className="text-gray-600 w-full py-4"
-                              value={author._id}
-                            >
-                              {author.name}
-                            </option>
-                          ))}
                       </select>
                     </div>
                   </div>
@@ -230,6 +278,7 @@ function AddBlog() {
                       id="first-name"
                       autoComplete="given-name"
                       onChange={(e) => setContent(e.target.value)}
+                      style={{ whiteSpace: "pre-wrap", height: "200px" }}
                       value={content}
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-32"
                     />

@@ -1,6 +1,9 @@
 const Author = require("../models/authorModel");
 
 exports.createAuthor = async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+  console.log(req.files);
   if (!req.body.name) {
     return res.status(400).json({
       message: "Please provide author name",

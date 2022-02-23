@@ -2,10 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
+import { UserContext } from "../context/User";
+import { useContext } from "react";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const { user } = useContext(UserContext);
+  const logout = async () => {
+    try {
+      let res = await Axios.post("/users/logout");
+      if (res.data.success) {
+        window.location.href = "/";
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   const getCategories = async () => {
     let { data } = await Axios.get("/categories");
     setCategories(data.categories);
@@ -26,17 +39,19 @@ function Nav() {
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="Workflow"
                   />
-                <h1 className="text-2xl font-bold mx-4 text-white">VAHDA</h1>
+                  <h1 className="text-2xl font-bold mx-4 text-white">VAHDA</h1>
                 </div>
               </Link>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4 relative">
-                  <Link
-                    to={"/dashboard"}
-                    className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Dashboard
-                  </Link>
+                  {user && (
+                    <Link
+                      to={"/dashboard"}
+                      className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
 
                   {categories.map((category) => (
                     <Link
@@ -48,12 +63,26 @@ function Nav() {
                     </Link>
                   ))}
                 </div>
-                <Link
-                  to={"/login"}
-                  className="absolute right-2 top-2 bg-green-400 px-6 py-2 rounded-2xl hover:bg-white hover:text-green-400 transition hover:font-semibold"
-                >
-                  login
-                </Link>
+                {user ? (
+                  <>
+                    <div className="absolute right-32 top-2 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium">
+                      hi, {user.name}
+                    </div>
+                    <div
+                      onClick={logout}
+                      className="absolute right-2 top-2 bg-red-400 px-6 py-2 rounded-2xl hover:bg-white hover:text-red-400 transition hover:font-semibold cursor-pointer"
+                    >
+                      Logout
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="absolute right-2 top-2 bg-green-400 px-6 py-2 rounded-2xl hover:bg-white hover:text-green-400 transition hover:font-semibold"
+                  >
+                    login
+                  </Link>
+                )}
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">
@@ -135,12 +164,18 @@ function Nav() {
                     {category.name}
                   </Link>
                 ))}
-                <Link
-                  to={"/login"}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium bg-blue-600"
-                >
-                  Login
-                </Link>
+                {user ? (
+                  <Link className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    Hi, {user.name}
+                  </Link>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             </div>
           )}

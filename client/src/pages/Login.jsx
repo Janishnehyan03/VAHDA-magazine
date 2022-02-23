@@ -1,11 +1,16 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
+import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Axios from "../Axios";
+import { UserContext } from "../context/User";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
+
   const login = async (e) => {
     e.preventDefault();
     try {
@@ -14,6 +19,7 @@ export default function Login() {
         password,
       });
       if (res.data.success) {
+        setUser(res.data.user);
         window.location.href = "/";
       }
     } catch (error) {
@@ -23,6 +29,11 @@ export default function Login() {
       console.log(error.response);
     }
   };
+  useEffect(() => {
+    if (user) {
+      window.location.href = "/";
+    }
+  }, [user]);
   return (
     <>
       <ToastContainer />

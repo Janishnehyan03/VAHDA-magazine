@@ -30,7 +30,11 @@ function Filtered() {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
             {posts.map((post, index) => (
-              <div className="p-4 md:w-1/3 sm:mb-0 mb-6" key={index}>
+              <Link
+                to={"/post/" + post._id}
+                className="p-4 md:w-1/3 sm:mb-0 mb-6"
+                key={index}
+              >
                 <div className="rounded-lg h-64 overflow-hidden">
                   <img
                     alt="content"
@@ -49,8 +53,7 @@ function Filtered() {
                     ? post.content.substring(0, 100) + "  ..."
                     : post.content}
                 </p>
-                <Link
-                  to={"/post/" + post._id}
+                <div
                   className="text-indigo-500 inline-flex items-center mt-3"
                 >
                   view post
@@ -65,8 +68,8 @@ function Filtered() {
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
-                </Link>
-              </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

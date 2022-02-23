@@ -86,7 +86,7 @@ function Dashboard() {
             </div>
             <div className="flex-1 p-6">
               <Link
-                to={"/create-author/"}
+                to={"/all-authors/"}
                 className="text-indigo-500 inline-flex items-center mt-3"
               >
                 view authors 

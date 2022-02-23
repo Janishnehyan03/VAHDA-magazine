@@ -18,6 +18,10 @@ const authorSchema = new mongoose.Schema(
       type: String,
       required: [true, "Description is required"],
     },
+    image: {
+      type: String,
+      default: "https://i.imgur.com/X2J5Z5J.jpg",
+    },
   },
   {
     timestamps: true,

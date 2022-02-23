@@ -1,11 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { UserAuthContext } from "./context/UserAuth";
+import { UserContext } from "./context/User";
 
 function ProtectedRoute({ component: Component, ...restOfProps }) {
-  const { authData } = useContext(UserAuthContext);
-  const isAuthenticated = authData ? true : false;
+  const { user } = useContext(UserContext);
+  const isAuthenticated = user ? true : false;
 
   return (
     <Route
@@ -15,7 +15,7 @@ function ProtectedRoute({ component: Component, ...restOfProps }) {
           <Component {...props} />
         ) : (
           setTimeout(() => {
-            return <Redirect to="/login" />;
+            <Redirect to={'/login'}/>
           }, 3000)
         )
       }

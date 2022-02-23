@@ -36,11 +36,15 @@ exports.createBlog = async (req, res) => {
 
 exports.getAllBlogs = async (req, res) => {
   try {
-    let query = {};
+    let query = req.query;
+    let limit = req.query.limit;
+    let random = Math.floor(Math.random() * 10) + 1;
     const blogs = await Blog.find(query)
       .sort({ createdAt: -1 })
       .populate("author", "name")
-      .populate("category", "name");
+      .populate("category", "name")
+      .limit(limit)
+
     res.status(200).json({
       results: blogs.length,
       blogs,
@@ -56,7 +60,9 @@ exports.getAllBlogs = async (req, res) => {
 
 exports.getBlogById = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id).populate("author", "name").populate('category', 'name');
+    const blog = await Blog.findById(req.params.id)
+      .populate("author", "name image description" )
+      .populate("category", "name");
     res.status(200).json({
       blog,
       success: true,

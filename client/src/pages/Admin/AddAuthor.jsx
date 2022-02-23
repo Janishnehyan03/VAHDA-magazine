@@ -1,82 +1,86 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Axios from "../../Axios";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { useEffect } from "react";
+import axios from "axios";
 
 function AddAuthor() {
   const [name, setname] = useState("");
   const [facebookProfile, setFacebookProfile] = useState("");
   const [twitterProfile, setTwitterProfile] = useState("");
   const [description, setDescription] = useState("");
-  const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const [imageLoading, setImageLoading] = useState(false);
+  const binaryData = new Blob([image], { type: "image/jpeg" });
 
-  const getAllAuthors = async () => {
+  const sendToCloudinary = async (e) => {
+    e.preventDefault();
+    setImageLoading(true);
     try {
-      let res = await Axios.get("/authors");
-      if (res.data.success) {
-        setAuthors(res.data.authors);
-      }
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "mern-chat");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/mern-chat/image/upload",
+        formData
+      );
+      const { secure_url } = res.data;
+      setImage(secure_url);
+      setImageLoading(false);
+      setLoading(false);
+      return secure_url;
     } catch (error) {
       console.log(error);
-    }
-  };
-  const deleteAuthor = async (id, name) => {
-    try {
-      if (window.confirm(`Are you sure you want to delete ${name}?`)) {
-        let res = await Axios.delete(`/authors/${id}`);
-        if (res.data.success) {
-          toast.success(`${name} deleted successfully`, {
-            position: "top-center",
-            autoClose: 2000,
-          });
-          getAllAuthors();
-        } else {
-          toast.error(`${name} could not be deleted`, {
-            position: "top-center",
-            autoClose: false,
-          });
-        }
-      }
-    } catch (error) {
-      console.log(error);
+      setImageLoading(false);
     }
   };
   const addAuthor = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      let res = await Axios.post("/authors", {
-        name,
-        facebookProfile,
-        twitterProfile,
-        description,
-      });
-      if (res.data.success) {
-        setLoading(false);
-        setname("");
-        setFacebookProfile("");
-        setTwitterProfile("");
-        setDescription("");
-        getAllAuthors();
-        toast.success(`${name} created successfully`, {
-          position: "top-center",
-          autoClose: 2000,
+    let imageResponse = await sendToCloudinary(e);
+    console.log(imageResponse);
+    if (imageResponse) {
+      try {
+        let res = await Axios.post("/authors", {
+          name,
+          facebookProfile,
+          twitterProfile,
+          description,
+          image: imageResponse,
         });
+        if (res.data.success) {
+          setLoading(false);
+          setname("");
+          setFacebookProfile("");
+          setTwitterProfile("");
+          setDescription("");
+          setImage(null);
+          toast.success(`${name} created successfully`, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: false,
+        });
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error.response);
-      toast.error(error.response.data.message, {
-        position: "top-center",
-        autoClose: false,
-      });
-      setLoading(false);
     }
   };
+
   useEffect(() => {
-    getAllAuthors();
-  }, []);
+    if (image) {
+      const objectUrl = URL.createObjectURL(binaryData);
+      setImagePreview(objectUrl);
+    } else {
+      setImagePreview("");
+    }
+  }, [image]);
   return (
     <>
       <ToastContainer />
@@ -86,6 +90,13 @@ function AddAuthor() {
             create post
           </h1>
           <div className="mt-5 md:mt-0 md:col-span-2">
+            <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 ml-6">
+              <img
+                src={imagePreview}
+                className="rounded-full w-20 h-20"
+                alt=""
+              />
+            </div>
             <form action="#" method="POST">
               <div className="shadow overflow-hidden sm:rounded-md">
                 <div className="px-4 py-5 bg-white sm:p-6">
@@ -159,6 +170,33 @@ function AddAuthor() {
                       />
                     </div>
                   </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Cover photo
+                    </label>
+                    <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                      <div className="space-y-1 text-center">
+                        <div className="flex text-sm text-gray-600">
+                          <label
+                            htmlFor="file-upload"
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                          >
+                            <span>Upload a file</span>
+                            <input
+                              id="file-upload"
+                              name="file"
+                              type="file"
+                              className="sr-only"
+                              onChange={(e) => setImage(e.target.files[0])}
+                            />
+                          </label>
+
+                          <p className="pl-1">or drag and drop</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {imageLoading && <LinearProgress />}
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   {loading ? (
@@ -182,75 +220,6 @@ function AddAuthor() {
       <div className="hidden sm:block" aria-hidden="true">
         <div className="py-5">
           <div className="border-t border-gray-200" />
-        </div>
-      </div>
-      {/* all authors' table */}
-      <div className="mt-10 sm:mt-0">
-        <div className="md:grid grid-cols-1">
-          <h1 className="text-2xl font-bold text-gray-800 text-center">
-            all authors
-          </h1>
-          <div className="mt-5 md:mt-0 md:col-span-2">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  <th className="px-5 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    name
-                  </th>
-                  <th className="px-5 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    facebook profile
-                  </th>
-                  <th className="px-5 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    twitter profile
-                  </th>
-                  <th className="px-5 py-3 bg-gray-50"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {authors.map((author) => (
-                  <tr key={author._id}>
-                    <td className="px-5 py-5 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-900">
-                        {author.name}
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-900">
-                        <a
-                          href={author.facebookProfile}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {author.facebookProfile}
-                        </a>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-900">
-                        <a
-                          href={author.twitterProfile}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {author.twitterProfile}
-                        </a>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                      <div className="flex justify-end">
-                        <button
-                          onClick={() => deleteAuthor(author._id, author.name)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </>

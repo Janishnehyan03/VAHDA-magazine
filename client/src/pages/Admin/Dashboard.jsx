@@ -17,7 +17,7 @@ function Dashboard() {
             <div className="flex justify-center border-b-2 p-3">
               <Link
                 to={"/create-post"}
-                className="font-bold text-xl mb-0 bg-gray-700 py-2 px-4 text-white"
+                className="font-bold text-xl mb-0 bg-gray-900 py-2 px-4 text-white"
               >
                 Create Post
               </Link>
@@ -48,7 +48,7 @@ function Dashboard() {
             <div className="flex justify-center border-b-2 p-3">
               <Link
                 to={"/create-category"}
-                className="font-bold text-xl mb-0 bg-orange-800 py-2 px-4 text-white"
+                className="font-bold text-xl mb-0 bg-gray-800 py-2 px-4 text-white"
               >
                 Create Category
               </Link>
@@ -79,7 +79,7 @@ function Dashboard() {
             <div className="flex justify-center border-b-2 p-3">
               <Link
                 to={"/create-author"}
-                className="font-bold text-xl mb-0 bg-blue-800 py-2 px-4 text-white"
+                className="font-bold text-xl mb-0 bg-gray-800 py-2 px-4 text-white"
               >
                 Create Author
               </Link>

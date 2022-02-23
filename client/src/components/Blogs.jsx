@@ -12,7 +12,7 @@ function Blogs() {
   const getBlogs = async () => {
     setLoading(true);
     try {
-      let res = await Axios.get("/blogs?random=true");
+      let res = await Axios.get("/blogs");
       if (res.data.success) {
         setBlogs(res.data.blogs);
         setLoading(false);
@@ -59,11 +59,6 @@ function Blogs() {
                     ? blog.title.substring(0, 100) + "  ..."
                     : blog.title}
                 </div>
-                <p className="text-gray-700">
-                  {blog.content.length > 100
-                    ? blog.content.substring(0, 100) + "  ..."
-                    : blog.content}
-                </p>
               </div>
 
               {/* author name on left of card */}

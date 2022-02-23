@@ -37,11 +37,39 @@ function AddAuthor() {
       setImageLoading(false);
     }
   };
+
   const addAuthor = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if (!image) {
+      try {
+        let res = await Axios.post("/authors", {
+          name,
+          facebookProfile,
+          twitterProfile,
+          description,
+        });
+        if (res.data.success) {
+          setLoading(false);
+          setname("");
+          setFacebookProfile("");
+          setTwitterProfile("");
+          setDescription("");
+          setImage(null);
+          toast.success(`${name} created successfully`, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: false,
+        });
+        setLoading(false);
+      }
+    }
     let imageResponse = await sendToCloudinary(e);
-    console.log(imageResponse);
     if (imageResponse) {
       try {
         let res = await Axios.post("/authors", {

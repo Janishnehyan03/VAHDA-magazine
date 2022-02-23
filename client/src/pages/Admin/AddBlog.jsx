@@ -4,6 +4,7 @@ import Axios from "../../Axios";
 import axios from "axios";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function AddBlog() {
   const [title, setTitle] = useState("");
@@ -15,7 +16,6 @@ function AddBlog() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
-  const [showAuthorInput, setShowAuthorInput] = useState(false);
 
   const getAllCategories = async () => {
     try {
@@ -119,7 +119,6 @@ function AddBlog() {
                       <input
                         type="text"
                         onChange={(e) => setTitle(e.target.value)}
-                        required
                         value={title}
                         id="first-name"
                         autoComplete="given-name"
@@ -159,60 +158,10 @@ function AddBlog() {
                       </select>
                     </div>
                     <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="first-name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Author Name
-                      </label>
-                      {showAuthorInput === "true" ? (
-                        <input
-                          type="text"
-                          onChange={(e) => setAuthor(e.target.value)}
-                          required
-                          value={author}
-                          id="first-name"
-                          autoComplete="given-name"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      ) : (
-                        <select
-                          onChange={(e) => setAuthor(e.target.value)}
-                          value={author}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        >
-                          <option
-                            value=""
-                            disabled
-                            selected
-                            hidden
-                            className="text-gray-600"
-                          >
-                            Select Author
-                          </option>
-                          {authors &&
-                            authors.map((author) => (
-                              <option
-                                className="text-gray-600 w-full py-4"
-                                value={author._id}
-                              >
-                                {author.name}
-                              </option>
-                            ))}
-                        </select>
-                      )}
-                    </div>
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="first-name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        select author type
-                      </label>
                       <select
-                        onChange={(e) => setShowAuthorInput(e.target.value)}
-                        value={showAuthorInput}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-500 text-white"
+                        onChange={(e) => setAuthor(e.target.value)}
+                        value={author}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option
                           value=""
@@ -221,20 +170,17 @@ function AddBlog() {
                           hidden
                           className="text-gray-600"
                         >
-                          Select Author Type
-                        </option>
-                        <option
-                          className="text-gray-600 w-full py-4"
-                          value={true}
-                        >
-                          Create New Author
-                        </option>
-                        <option
-                          className="text-gray-600 w-full py-4"
-                          value={false}
-                        >
                           Select Author
                         </option>
+                        {authors &&
+                          authors.map((author) => (
+                            <option
+                              className="text-gray-600 w-full py-4"
+                              value={author._id}
+                            >
+                              {author.name}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>
@@ -283,6 +229,13 @@ function AddBlog() {
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-32"
                     />
                   </div>
+                  <a
+                    href="/html"
+                    target={"_blank"}
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4"
+                  >
+                    Html Editor
+                  </a>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   {loading ? (

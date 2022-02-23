@@ -20,7 +20,6 @@ const authorSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: "https://i.imgur.com/X2J5Z5J.jpg",
     },
   },
   {

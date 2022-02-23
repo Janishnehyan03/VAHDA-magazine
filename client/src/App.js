@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreateHtml from "./components/CreateHtml";
 import Filtered from "./components/Filtered";
 import Footer from "./components/Footer";
 import Nav from "./components/Navbar";
@@ -25,6 +26,7 @@ function App() {
         <Nav navOpen={navOpen} setNavOpen={setNavOpen} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/html" component={CreateHtml} />
           <Route path="/create-post" component={AddBlog} />
           <Route path="/create-author" component={AddAuthor} />
           <Route path="/login" component={Login} />

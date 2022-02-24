@@ -9,6 +9,7 @@ const blogRoute = require("./routes/blog");
 const userRoute = require("./routes/user");
 const categoryRoute = require("./routes/category");
 const authorRoute = require("./routes/author");
+const videoRoute = require("./routes/video");
 const morgan = require("morgan");
 const path = require("path");
 
@@ -36,7 +37,7 @@ app.use("/api/v1/blogs", blogRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/authors", authorRoute);
-
+app.use("/api/v1/videos", videoRoute);
 
 if (process.env.NODE_ENV === "production") {
   // send file from build folder

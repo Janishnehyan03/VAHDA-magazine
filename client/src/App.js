@@ -5,15 +5,18 @@ import Filtered from "./components/Filtered";
 import Footer from "./components/Footer";
 import Nav from "./components/Navbar";
 import SingleBlog from "./components/SingleBlog";
+import Videos from "./components/Videos";
 import { UserProvider } from "./context/User";
 import ErrorPage from "./pages/404Error";
 import AddAuthor from "./pages/Admin/AddAuthor";
 import AddBlog from "./pages/Admin/AddBlog";
 import AddCategory from "./pages/Admin/AddCategory";
+import AddVideo from "./pages/Admin/AddVideo";
 import AllAuthors from "./pages/Admin/AllAuthors";
 import AllBlogs from "./pages/Admin/AllBlogs";
 import Dashboard from "./pages/Admin/Dashboard";
 import EditBlog from "./pages/Admin/EditBlog";
+import Authors from "./pages/Authors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ProtectedRoute from "./Protected";
@@ -37,6 +40,10 @@ function App() {
           <Route path={"/all-posts"} component={AllBlogs} />
           <Route path={"/edit-post/:id"} component={EditBlog} />
           <Route path={"/all-authors"} component={AllAuthors} />
+          <Route path={"/authors"} component={Authors} />
+          <Route path={"/videos"} component={Videos} />
+          <Route path={"/create-video"} component={AddVideo} />
+
           <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer />

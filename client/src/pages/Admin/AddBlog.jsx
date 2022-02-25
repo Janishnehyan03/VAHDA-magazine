@@ -56,6 +56,11 @@ function AddBlog() {
     } catch (error) {
       console.log(error.response);
       setImageLoading(false);
+      setLoading(false);
+      toast.error("Image Uploading Error", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+      });
     }
   };
   const addBlog = async (e) => {

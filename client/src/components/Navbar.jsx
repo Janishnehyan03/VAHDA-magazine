@@ -68,6 +68,12 @@ function Nav() {
                     >
                      videos
                     </Link>
+                        <Link
+                      to={"/contact/"}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                     Contact us 
+                    </Link>
                 </div>
                 {user ? (
                   <>
@@ -155,7 +161,7 @@ function Nav() {
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Link
-                  to={"/dashbaord"}
+                  to={"/dashboard"}
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Dashboard
@@ -170,6 +176,18 @@ function Nav() {
                     {category.name}
                   </Link>
                 ))}
+                  <Link
+                    to={`/videos/`}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Videos
+                  </Link>
+                  <Link
+                    to={`/contact/`}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Contact us 
+                  </Link>
                 {user ? (
                   <Link className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                     Hi, {user.name}

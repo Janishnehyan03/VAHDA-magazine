@@ -18,7 +18,7 @@ function Dashboard() {
             <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
               <Link
                 to={"/create-post"}
-                className="text-2xl bg-blue-500 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
+                className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
                 Create New Post
               </Link>
@@ -29,7 +29,7 @@ function Dashboard() {
               </p>
               <Link
                 to={"/all-posts"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
               >
                 view all
                 <svg
@@ -51,7 +51,7 @@ function Dashboard() {
             <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
               <Link
                 to={"/create-author"}
-                className="text-2xl bg-blue-500 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
+                className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
                 Create New Author
               </Link>
@@ -62,7 +62,7 @@ function Dashboard() {
               </p>
               <Link
                 to={"/all-authors"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
               >
                 view all
                 <svg
@@ -84,7 +84,7 @@ function Dashboard() {
             <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
               <Link
                 to={"/create-category"}
-                className="text-2xl bg-blue-500 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
+                className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
                 Create New Category
               </Link>
@@ -117,7 +117,7 @@ function Dashboard() {
             <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
               <Link
                 to={"/create-video"}
-                className="text-2xl bg-blue-500 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
+                className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
                 Add New Video 
               </Link>
@@ -128,7 +128,7 @@ function Dashboard() {
               </p>
               <Link
                 to={"/create-category"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
               >
                 view all
                 <svg

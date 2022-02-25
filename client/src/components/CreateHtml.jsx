@@ -7,50 +7,33 @@ import { useState } from "react";
 
 function CreateHtml() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [copyOn, setCopyOn] = useState(false);
   const html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  function copyToClipboard() {
+    navigator.clipboard.writeText(html);
+    alert("HTML Code Copied to clipboard");
+  }
 
   return (
-    <div>
+    <div className="h-screen">
       <Editor
         editorState={editorState}
         onEditorStateChange={setEditorState}
         toolbarClassName="toolbarClassName"
         wrapperClassName="wrapperClassName"
         editorClassName="editorClassName"
+        placeholder="Enter your content here"
       />
-      <div className="text-center">
+
+      <div className="text-center mt-10">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
-            setCopyOn(!copyOn);
+            copyToClipboard();
           }}
         >
-          Convert to HTML
+          Copy to Clipboard
         </button>
       </div>
-      {copyOn && (
-        <div className="text-center">
-          <textarea
-            className="bg-gray-200 border border-gray-400 rounded-lg px-4 py-2 text-gray-700 mb-4"
-            value={html}
-            readOnly
-          />
-        </div>
-      )}
-      {copyOn && (
-        <div className="text-center">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              navigator.clipboard.writeText(html);
-              setCopyOn(false);
-            }}
-          >
-            Copy to Clipboard
-          </button>
-        </div>
-      )}
     </div>
   );
 }

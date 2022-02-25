@@ -17,6 +17,7 @@ import AllBlogs from "./pages/Admin/AllBlogs";
 import Dashboard from "./pages/Admin/Dashboard";
 import EditBlog from "./pages/Admin/EditBlog";
 import Authors from "./pages/Authors";
+import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ProtectedRoute from "./Protected";
@@ -29,6 +30,7 @@ function App() {
         <Nav navOpen={navOpen} setNavOpen={setNavOpen} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/contact" component={Contact} />
           <Route exact path="/html" component={CreateHtml} />
           <Route path="/create-post" component={AddBlog} />
           <Route path="/create-author" component={AddAuthor} />

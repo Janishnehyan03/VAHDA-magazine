@@ -10,7 +10,6 @@ function SingleBlog() {
     const { data } = await Axios.get(`/blogs/${id}`);
     setPost(data.blog);
   };
-  console.log(post);
   useEffect(() => {
     getPost();
   }, [id]);

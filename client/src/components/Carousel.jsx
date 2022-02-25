@@ -7,10 +7,8 @@ import Axios from "../Axios";
 function Carousel() {
   const [current, setCurrent] = useState(0);
   const [blogs, setBlogs] = useState([]);
-  console.log(blogs);
   const getBlogs = async () => {
     let { data } = await Axios.get("/blogs");
-    console.log(data);
     setBlogs(data.blogs);
   };
   const nextSlide = () => {
@@ -48,11 +46,13 @@ function Carousel() {
                   ? blogs[current].image
                   : "https://flowbite.com/docs/images/carousel/carousel-3.svg"
               }
-              
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 opacity-50 ease-linear"
+              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 ease-linear"
               alt={blogs[current] && blogs[current].title}
             />
-            <h1 className="text-black text-center text-3xl font-bold absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+
+            {/* title background with 50% opacity */}
+            <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" />
+            <h1 className="text-white capitalize text-center  py-2 text-3xl font-bold absolute top-1/2 left-1/2 px-8 -translate-x-1/2 -translate-y-1/2">
               {blogs[current] && blogs[current].title}
             </h1>
           </Link>

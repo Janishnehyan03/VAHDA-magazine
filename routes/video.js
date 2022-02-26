@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    let videos = await Video.find();
+    let videos = await Video.find().sort({ createdAt: -1 });
     res.status(200).json({
       success: true,
       videos,

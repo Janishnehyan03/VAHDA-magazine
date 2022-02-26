@@ -47,6 +47,11 @@ function Filtered() {
                     ? post.title.substring(0, 50) + "..."
                     : post.title}
                 </h2>
+                <div class="px-6 pt-4 pb-2">
+                  <span class="inline-block text-sm font-semibold text-gray-400 mr-2 mb-2">
+                    ✒️ {post.author}
+                  </span>
+                </div>
 
                 <div className="text-indigo-500 inline-flex items-center mt-3">
                   view post

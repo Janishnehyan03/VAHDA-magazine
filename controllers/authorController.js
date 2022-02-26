@@ -1,30 +1,14 @@
-const Author = require("../models/authorModel");
+const AuthorSection = require("../models/authorModel");
 
-exports.createAuthor = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
-  console.log(req.files);
-  if (!req.body.name) {
-    return res.status(400).json({
-      message: "Please provide author name",
-    });
-  }else if (!req.body.description) {
-    return res.status(400).json({
-      message: "Please provide author description",
-    });
-  }
+exports.createAuthorSection = async (req, res) => {
   try {
-    const author = await Author.create(req.body);
+    let authorSection = await AuthorSection.create(req.body);
     res.status(200).json({
-      author,
+      status: "success",
+      authorSection,
       success: true,
     });
   } catch (error) {
-    if(error.code === 11000) {
-      return res.status(400).json({
-        message: `Author with name ${req.body.name} already exists`,
-      });
-    }
     res.status(400).json({
       error,
       success: false,
@@ -32,11 +16,12 @@ exports.createAuthor = async (req, res) => {
   }
 };
 
-exports.getAllAuthors = async (req, res) => {
+exports.getAuthorSection = async (req, res) => {
   try {
-    const authors = await Author.find().sort({ createdAt: -1 });
+    let authorSection = await AuthorSection.find();
     res.status(200).json({
-      authors,
+      status: "success",
+      authorSection,
       success: true,
     });
   } catch (error) {
@@ -46,41 +31,13 @@ exports.getAllAuthors = async (req, res) => {
     });
   }
 };
-exports.getAuthorById = async (req, res) => {
+
+exports.deleteAuthorSection = async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id);
+    let authorSection = await AuthorSection.findByIdAndDelete(req.params.id);
     res.status(200).json({
-      author,
-      success: true,
-    });
-  } catch (error) {
-    res.status(400).json({
-      error,
-      success: false,
-    });
-  }
-};
-exports.updateAuthorById = async (req, res) => {
-  try {
-    const author = await Author.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.status(200).json({
-      author,
-      success: true,
-    });
-  } catch (error) {
-    res.status(400).json({
-      error,
-      success: false,
-    });
-  }
-};
-exports.deleteAuthorById = async (req, res) => {
-  try {
-    const author = await Author.findByIdAndDelete(req.params.id);
-    res.status(200).json({
-      author,
+      status: "success",
+      authorSection,
       success: true,
     });
   } catch (error) {

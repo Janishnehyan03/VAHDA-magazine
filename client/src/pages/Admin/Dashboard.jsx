@@ -22,14 +22,10 @@ function Dashboard() {
               >
                 Create New Post
               </Link>
-              <p className="text-gray-500 dark:text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident ab nulla quod dignissimos vel non corrupti doloribus
-                voluptatum eveniet
-              </p>
+              <p className="text-gray-500 dark:text-gray-300 py-10"></p>
               <Link
                 to={"/all-posts"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  rounded-full dark:bg-blue-500 text-white hover:bg-white hover:text-blue-600"
               >
                 view all
                 <svg
@@ -55,14 +51,11 @@ function Dashboard() {
               >
                 Create New Author
               </Link>
-              <p className="text-gray-500 dark:text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident ab nulla quod dignissimos vel non corrupti doloribus
-                voluptatum eveniet
-              </p>
+              <p className="text-gray-500 dark:text-gray-300 py-10"></p>
+
               <Link
                 to={"/all-authors"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  rounded-full dark:bg-blue-500 text-white hover:bg-white hover:text-blue-600"
               >
                 view all
                 <svg
@@ -88,11 +81,8 @@ function Dashboard() {
               >
                 Create New Category
               </Link>
-              <p className="text-gray-500 dark:text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident ab nulla quod dignissimos vel non corrupti doloribus
-                voluptatum eveniet
-              </p>
+              <p className="text-gray-500 dark:text-gray-300 py-10"></p>
+
               <Link
                 to={"/create-category"}
                 className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
@@ -119,16 +109,13 @@ function Dashboard() {
                 to={"/create-video"}
                 className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
-                Add New Video 
+                Add New Video
               </Link>
-              <p className="text-gray-500 dark:text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident ab nulla quod dignissimos vel non corrupti doloribus
-                voluptatum eveniet
-              </p>
+              <p className="text-gray-500 dark:text-gray-300 py-10"></p>
+
               <Link
                 to={"/create-category"}
-                className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 hover:bg-blue-300 dark:text-white hover:bg-white hover:text-blue-600 dark:hover:text-blue-500"
+                className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  rounded-full dark:bg-blue-500 text-white hover:bg-white hover:text-blue-600"
               >
                 view all
                 <svg
@@ -149,9 +136,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        
       </section>
-
     </>
   );
 }

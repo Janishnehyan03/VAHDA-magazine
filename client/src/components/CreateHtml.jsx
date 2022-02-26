@@ -14,7 +14,7 @@ function CreateHtml() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <Editor
         editorState={editorState}
         onEditorStateChange={setEditorState}

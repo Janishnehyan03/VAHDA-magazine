@@ -31,7 +31,7 @@ function AddBlog() {
     try {
       let res = await Axios.get("/authors/author-section");
       if (res.data.success) {
-        setAllAuthorDetails(res.data.authoSection);
+        setAllAuthorDetails(res.data.authorSection);
       }
     } catch (error) {
       console.log(error);
@@ -121,7 +121,7 @@ function AddBlog() {
                         htmlFor="first-name"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Title
+                        Title <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -139,6 +139,7 @@ function AddBlog() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Category
+                        <span className="text-red-500">*</span>{" "}
                       </label>
                       <select
                         onChange={(e) => setCategory(e.target.value)}
@@ -171,6 +172,7 @@ function AddBlog() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Author's Name
+                        <span className="text-red-500">*</span>{" "}
                       </label>
                       <input
                         type="text"
@@ -187,6 +189,7 @@ function AddBlog() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Section
+                        <span className="text-red-500">*</span>{" "}
                       </label>
                       <select
                         onChange={(e) => setAuthorDetails(e.target.value)}
@@ -218,6 +221,7 @@ function AddBlog() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Cover photo
+                      <span className="text-red-500">*</span>{" "}
                     </label>
                     <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
@@ -248,6 +252,7 @@ function AddBlog() {
                       className="block text-sm font-medium text-gray-700"
                     >
                       Content
+                      <span className="text-red-500">*</span>{" "}
                     </label>
                     <textarea
                       type="text"

@@ -36,7 +36,7 @@ function AddAuthor() {
       let res = await Axios.get("/authors/author-section");
       if (res.data.success) {
         setLoading(false);
-        setAuthorSections(res.data.authoSection);
+        setAuthorSections(res.data.authorSection);
       }
     } catch (error) {
       console.log(error);

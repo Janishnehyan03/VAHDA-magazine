@@ -17,19 +17,17 @@ const blogSchema = new mongoose.Schema(
       ref: "User",
     },
     author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Author",
+      type: String,
+      required: [true, "Author is required"],
+    },
+    authorDetails: {
+      type: String,
+      required: [true, "Author details is required"],
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
-    hashtags: [
-      {
-        type: String,
-        maxlength: [3, "Hashtag cannot be more than 3 characters"],
-      },
-    ],
     image: {
       type: String,
       required: [true, "Image is required"],

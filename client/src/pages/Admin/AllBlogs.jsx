@@ -90,7 +90,7 @@ function AllBlogs() {
                         {blog.category && blog.category.name}
                       </td>
                       <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {blog.author && blog.author.name}
+                        {blog.author && blog.author}
                       </td>
                       <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         <Link

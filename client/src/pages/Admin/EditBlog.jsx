@@ -8,13 +8,13 @@ import { useParams } from "react-router-dom";
 
 function EditBlog() {
   const { id } = useParams();
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [author, setAuthor] = useState("");
   const [authors, setAuthors] = useState([]);
+  const [authorDetails, setAuthorDetails] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
@@ -42,9 +42,9 @@ function EditBlog() {
   };
   const getAllAuthors = async () => {
     try {
-      let res = await Axios.get("/authors");
+      let res = await Axios.get("/authors/author-section");
       if (res.data.success) {
-        setAuthors(res.data.authors);
+        setAuthors(res.data.authorSection);
       }
     } catch (error) {
       console.log(error);
@@ -71,7 +71,7 @@ function EditBlog() {
       setImageLoading(false);
     }
   };
-  const addBlog = async (e) => {
+  const editBlog = async (e) => {
     e.preventDefault();
     setLoading(true);
     let imageResponse = await sendToCloudinary(e);
@@ -83,6 +83,7 @@ function EditBlog() {
           image: imageResponse,
           category,
           author,
+          authorDetails,
         });
         if (res.data.success) {
           setAuthor("");
@@ -176,10 +177,11 @@ function EditBlog() {
                         htmlFor="first-name"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Author Name
+                        Author Section
                       </label>
                       <select
-                        onChange={(e) => setAuthor(e.target.value)}
+                        onChange={(e) => setAuthorDetails(e.target.value)}
+                        value={authorDetails}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option
@@ -189,18 +191,35 @@ function EditBlog() {
                           hidden
                           className="text-gray-600"
                         >
-                          Select Author
+                          Select section
                         </option>
                         {authors &&
                           authors.map((author) => (
                             <option
                               className="text-gray-600 w-full py-4"
-                              value={author._id}
+                              value={author.name}
                             >
                               {author.name}
                             </option>
                           ))}
                       </select>
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Author
+                      </label>
+                      <input
+                        type="text"
+                        onChange={(e) => setAuthor(e.target.value)}
+                        required
+                        value={author}
+                        id="first-name"
+                        autoComplete="given-name"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
                     </div>
                   </div>
 
@@ -238,14 +257,11 @@ function EditBlog() {
                     >
                       Content
                     </label>
-                    <textarea
-                      type="text"
-                      id="first-name"
-                      autoComplete="given-name"
-                      onChange={(e) => setContent(e.target.value)}
-                      value={content}
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-32"
-                    />
+                    <div
+                      readOnly
+                      dangerouslySetInnerHTML={{ __html: content }}
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full  shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    ></div>
                   </div>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -254,10 +270,10 @@ function EditBlog() {
                   ) : (
                     <button
                       type="submit"
-                      onClick={(e) => addBlog(e)}
+                      onClick={(e) => editBlog(e)}
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                      Post
+                      update
                     </button>
                   )}
                 </div>

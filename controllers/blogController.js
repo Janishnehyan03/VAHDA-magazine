@@ -8,6 +8,9 @@ exports.createBlog = async (req, res) => {
   } else if (!req.body.content) {
     message = "Content is required";
   } else if (!req.body.category) {
+  } else if (!req.body.authorDetails) {
+    message = "Author Details is required";
+  } else if (!req.body.category) {
     message = "Category is required";
   } else if (!req.body.author) {
     message = "Please provide author";
@@ -40,10 +43,9 @@ exports.getAllBlogs = async (req, res) => {
     let limit = req.query.limit;
     const blogs = await Blog.find(query)
       .sort({ createdAt: -1 })
-      .populate("author", "name")
       .populate("category", "name")
       .limit(limit)
-      .skip(query.skip);
+      .skip(query.skip)
 
     res.status(200).json({
       results: blogs.length,

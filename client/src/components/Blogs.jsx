@@ -69,7 +69,7 @@ function Blogs() {
               <div class="px-6 pt-4 pb-2">
                 {blog.author && (
                   <span class="inline-block text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    ✒️ {blog.author.name}
+                    ✒️ {blog.author}
                   </span>
                 )}
               </div>

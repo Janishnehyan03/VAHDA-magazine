@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../Axios";
+import moment from "moment";
 
 function SingleBlog() {
   const { id } = useParams();
@@ -24,9 +25,12 @@ function SingleBlog() {
               src={post.image}
             />
           </div>
+          <p className="text-center text-gray-500 text-xs tracking-widest uppercase my-4">
+            {moment(post.createdAt).format("MMMM Do YYYY")}
+          </p>
           <div class="px-6 pt-4 pb-2">
             {post.category && (
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 ">
                 <Link to={`/category/${post.category._id}`}>
                   {post.category.name}
                 </Link>
@@ -47,21 +51,15 @@ function SingleBlog() {
                 >
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
                   <circle cx={12} cy={7} r={4} />
-                  {post.author && (
-                    <img
-                      src={post.author.image}
-                      className="w-20 h-20 rounded-full"
-                    />
-                  )}
                 </svg>
               </div>
               <div className="flex flex-col items-center text-center justify-center">
                 <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
-                  {post.author ? post.author.name : ""}
+                  {post.author ? post.author : ""}
                 </h2>
                 <div className="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" />
                 <p className="text-base">
-                  {post.author ? post.author.description : ""}
+                  {post.author ? post.authorDetails : ""}
                 </p>
               </div>
             </div>
@@ -72,7 +70,10 @@ function SingleBlog() {
 
               {post.category && post.category.name === "poems" ? (
                 <div className="flex flex-col sm:flex-row justify-center items-center text-center">
-                  <p className="text-gray-600">{post.content}</p>
+                  <p
+                    className="text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  ></p>
                 </div>
               ) : (
                 <div className="flex flex-col sm:flex-row justify-center items-center">

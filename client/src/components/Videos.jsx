@@ -31,7 +31,7 @@ function Videos() {
         Videos
       </h1>
 
-      <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+      <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 justify-center">
         {videos.map((video, index) => (
           <div className="p-4 md:w-1/3 sm:mb-0 mb-6" key={index}>
             <div
@@ -40,7 +40,7 @@ function Videos() {
             >
               <YouTube videoId={video.videoId} opts={opts} />
             </div>
-            <h1 className="text-sm text-indigo-800  lg:text-2xl text-center">
+            <h1 className="text-sm text-indigo-800  lg:text-2xl text-center px-8">
               {video.title}
             </h1>
           </div>

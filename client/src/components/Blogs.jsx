@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
+import moment from "moment";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -43,6 +44,9 @@ function Blogs() {
                 src={blog.image}
                 alt="content"
               />
+              <p className="text-center text-gray-500 text-xs tracking-widest uppercase my-4">
+                {moment(blog.createdAt).format("MMMM Do YYYY")}
+              </p>
               <div class="px-6 pt-4 pb-2">
                 {blog.category && (
                   <Link to={`/category/${blog.category._id}`}>

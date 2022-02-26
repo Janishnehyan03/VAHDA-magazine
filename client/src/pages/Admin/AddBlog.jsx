@@ -4,7 +4,6 @@ import Axios from "../../Axios";
 import axios from "axios";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 function AddBlog() {
   const [title, setTitle] = useState("");
@@ -12,7 +11,8 @@ function AddBlog() {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState("");
   const [author, setAuthor] = useState("");
-  const [authors, setAuthors] = useState("");
+  const [authorDetails, setAuthorDetails] = useState("");
+  const [allAuthorDetails, setAllAuthorDetails] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
@@ -27,16 +27,17 @@ function AddBlog() {
       console.log(error);
     }
   };
-  const getAllAuthors = async () => {
+  const getAllSections = async () => {
     try {
-      let res = await Axios.get("/authors");
+      let res = await Axios.get("/authors/author-section");
       if (res.data.success) {
-        setAuthors(res.data.authors);
+        setAllAuthorDetails(res.data.authoSection);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   const sendToCloudinary = async (e) => {
     e.preventDefault();
     setImageLoading(true);
@@ -75,6 +76,7 @@ function AddBlog() {
           image: imageResponse,
           category,
           author,
+          authorDetails,
         });
         if (res.data.success) {
           setAuthor("");
@@ -99,7 +101,7 @@ function AddBlog() {
   };
   useEffect(() => {
     getAllCategories();
-    getAllAuthors();
+    getAllSections();
   }, []);
   return (
     <>
@@ -130,6 +132,7 @@ function AddBlog() {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
+
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="first-name"
@@ -163,9 +166,31 @@ function AddBlog() {
                       </select>
                     </div>
                     <div className="col-span-6 sm:col-span-3">
-                      <select
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Author's Name
+                      </label>
+                      <input
+                        type="text"
                         onChange={(e) => setAuthor(e.target.value)}
                         value={author}
+                        id="first-name"
+                        autoComplete="given-name"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Section
+                      </label>
+                      <select
+                        onChange={(e) => setAuthorDetails(e.target.value)}
+                        value={authorDetails}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option
@@ -175,15 +200,15 @@ function AddBlog() {
                           hidden
                           className="text-gray-600"
                         >
-                          Select Author
+                          Author's Section
                         </option>
-                        {authors &&
-                          authors.map((author) => (
+                        {allAuthorDetails &&
+                          allAuthorDetails.map((section) => (
                             <option
-                              className="text-gray-600 w-full py-4"
-                              value={author._id}
+                              className="text-gray-600 w-full py-4 h-8"
+                              value={section.name}
                             >
-                              {author.name}
+                              {section.name}
                             </option>
                           ))}
                       </select>

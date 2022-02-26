@@ -47,15 +47,8 @@ function Filtered() {
                     ? post.title.substring(0, 50) + "..."
                     : post.title}
                 </h2>
-                <p className="text-base leading-relaxed mt-2">
-                  {" "}
-                  {post.content.length > 100
-                    ? post.content.substring(0, 100) + "  ..."
-                    : post.content}
-                </p>
-                <div
-                  className="text-indigo-500 inline-flex items-center mt-3"
-                >
+
+                <div className="text-indigo-500 inline-flex items-center mt-3">
                   view post
                   <svg
                     fill="none"

@@ -27,7 +27,7 @@ function Carousel() {
   };
   // change current value to the next slide every 3 seconds
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000);
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [current]);
 

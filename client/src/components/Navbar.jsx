@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Axios from "../Axios";
 import { UserContext } from "../context/User";
 import { useContext } from "react";
@@ -32,7 +32,7 @@ function Nav() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <Link to={"/"}>
+              <NavLink  to={"/"}>
                 <div className="flex">
                   <img
                     className="h-8 w-8"
@@ -41,39 +41,43 @@ function Nav() {
                   />
                   <h1 className="text-2xl font-bold mx-4 text-white">VAHDA</h1>
                 </div>
-              </Link>
+              </NavLink>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4 relative">
                   {user && (
-                    <Link
+                    <NavLink
+                    activeClassName="text-white bg-gray-900"
                       to={"/dashboard"}
                       className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Dashboard
-                    </Link>
+                    </NavLink>
                   )}
 
                   {categories.map((category) => (
-                    <Link
+                    <NavLink
                       to={"/category/" + category._id}
                       key={category._id}
+                      activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       {category.name}
-                    </Link>
+                    </NavLink>
                   ))}
-                        <Link
-                      to={"/videos/"}
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                     videos
-                    </Link>
-                        <Link
-                      to={"/contact/"}
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                     Contact us 
-                    </Link>
+                  <NavLink
+                    activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                    to={"/videos/"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    videos
+                  </NavLink>
+                  <NavLink
+                    activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                    to={"/contact/"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Contact us
+                  </NavLink>
                 </div>
                 {user ? (
                   <>
@@ -176,18 +180,18 @@ function Nav() {
                     {category.name}
                   </Link>
                 ))}
-                  <Link
-                    to={`/videos/`}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Videos
-                  </Link>
-                  <Link
-                    to={`/contact/`}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Contact us 
-                  </Link>
+                <Link
+                  to={`/videos/`}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Videos
+                </Link>
+                <Link
+                  to={`/contact/`}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Contact us
+                </Link>
                 {user ? (
                   <Link className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                     Hi, {user.name}

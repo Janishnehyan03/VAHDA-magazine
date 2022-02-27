@@ -49,12 +49,12 @@ function Dashboard() {
                 to={"/create-author"}
                 className="text-2xl bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded-lg font-semibold text-gray-700 capitalize dark:text-white"
               >
-                Create New Author
+                Create New Author Section 
               </Link>
               <p className="text-gray-500 dark:text-gray-300 py-10"></p>
 
               <Link
-                to={"/all-authors"}
+                to={"/create-author"}
                 className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  rounded-full dark:bg-blue-500 text-white hover:bg-white hover:text-blue-600"
               >
                 view all
@@ -114,7 +114,7 @@ function Dashboard() {
               <p className="text-gray-500 dark:text-gray-300 py-10"></p>
 
               <Link
-                to={"/create-category"}
+                to={"/create-video"}
                 className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  rounded-full dark:bg-blue-500 text-white hover:bg-white hover:text-blue-600"
               >
                 view all

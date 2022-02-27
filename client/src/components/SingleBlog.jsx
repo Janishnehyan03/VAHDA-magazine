@@ -3,10 +3,14 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../Axios";
 import moment from "moment";
+import { UserContext } from "../context/User";
+import { useContext } from "react";
+import Related from "./Related";
 
 function SingleBlog() {
   const { id } = useParams();
   const [post, setPost] = useState({});
+  const { user } = useContext(UserContext);
   const getPost = async () => {
     const { data } = await Axios.get(`/blogs/${id}`);
     setPost(data.blog);
@@ -18,6 +22,15 @@ function SingleBlog() {
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-col">
         <div className="lg:w-4/6 mx-auto">
+          {/* edit button */}
+          {user && (
+            <Link
+              to={`/edit-post/${id}`}
+              className="bg-gray-400 rounded-lg py-2 px-4"
+            >
+              Edit
+            </Link>
+          )}
           <div className="rounded-lg h-96 overflow-hidden">
             <img
               alt="content"
@@ -86,6 +99,9 @@ function SingleBlog() {
             </div>
           </div>
         </div>
+      {post ? (
+        <Related blogId={id} categoryId={post.category && post.category._id} />
+      ) : null}
       </div>
     </section>
   );

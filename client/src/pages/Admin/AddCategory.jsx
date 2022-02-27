@@ -132,7 +132,7 @@ function AddCategory() {
                           <button
                             type="submit"
                             onClick={(e) => addCategory(e)}
-                            className="inline-block justify-center py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="inline-block justify-center py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                           >
                             Add Category
                           </button>
@@ -177,7 +177,7 @@ function AddCategory() {
                       onClick={() => {
                         editCategory(category._id);
                       }}
-                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-blue-600 hover:bg-white hover:text-blue-700 transition border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                     >
                       Edit
                     </button>
@@ -187,7 +187,7 @@ function AddCategory() {
                       onClick={() => {
                         deleteCategory(category._id, category.name);
                       }}
-                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-red-600 hover:bg-white hover:text-red-700 transition border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                     >
                       Delete
                     </button>

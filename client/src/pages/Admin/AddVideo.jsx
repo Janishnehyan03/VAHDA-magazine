@@ -19,37 +19,18 @@ function AddVideo() {
       console.log(error.response);
     }
   };
-  const editVideo = async (id) => {
-    try {
-      const response = await Axios.patch(`/videos/${id}`, {
-        title,
-        videoId,
-      });
-      if (response.data.success) {
-        toast.success(`${title} edited successfully`, {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        getVideos();
-      } else {
-        toast.error(`${title} could not be edited`, {
-          position: "top-center",
-          autoClose: false,
-        });
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+
   const deleteVideo = async (id, title) => {
     try {
-      const response = await Axios.delete(`/videos/${id}`);
-      if (response.data.success) {
-        toast.success(`${title} deleted successfully`, {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        getVideos();
+      if (window.confirm("Do you want to delete this item?")) {
+        const response = await Axios.delete(`/videos/${id}`);
+        if (response.data.success) {
+          toast.success(`${title} deleted successfully`, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+          getVideos();
+        }
       }
     } catch (error) {
       console.log(error.response);
@@ -68,7 +49,7 @@ function AddVideo() {
         setTitle("");
         setVideoId("");
         setLoading(false);
-        getVideos()
+        getVideos();
         toast.success("Video added successfully", {
           position: "top-center",
           autoClose: 2000,
@@ -158,14 +139,13 @@ function AddVideo() {
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="ring-1 ring-black ring-opacity-5 bg-white divide-y divide-dashed py-10 mb-4">
             <h1 className="text-center text-3xl font-bold text-blue-900">
-              All Videos 
+              All Videos
             </h1>
           </div>
           <table className="table-auto w-full">
             <thead>
               <tr>
                 <th className="px-4 py-2">video Name</th>
-                <th className="px-4 py-2">Edit </th>
                 <th className="px-4 py-2">Delete </th>
               </tr>
             </thead>
@@ -173,16 +153,7 @@ function AddVideo() {
               {videos.map((video) => (
                 <tr key={video._id}>
                   <td className="border px-4 py-2">{video.title}</td>
-                  <td className="border px-4 py-2">
-                    <button
-                      onClick={() => {
-                        editVideo(video._id);
-                      }}
-                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                    >
-                      Edit
-                    </button>
-                  </td>
+
                   <td className="border px-4 py-2">
                     <button
                       onClick={() => {

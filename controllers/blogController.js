@@ -45,7 +45,7 @@ exports.getAllBlogs = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("category", "name")
       .limit(limit)
-      .skip(query.skip)
+      .skip(query.skip);
 
     res.status(200).json({
       results: blogs.length,
@@ -112,13 +112,40 @@ exports.deleteBlogById = async (req, res) => {
 exports.getBlogsByCategory = async (req, res) => {
   try {
     const blogs = await Blog.find({
-      category: ObjectId(req.params.id),
-    }).populate("author", "name");
+      category: ObjectId(req.params.categoryId),
+      _id: { $ne: req.params.blogId },
+    }).populate("category", "name");
     res.status(200).json({
       blogs,
       success: true,
     });
   } catch (error) {
+    res.status(400).json({
+      error,
+      success: false,
+    });
+  }
+};
+
+exports.findExeptMe = async (req, res) => {
+  try {
+    // find all blogs with category id and except me
+    const blogs = await Blog.find({
+      category: ObjectId(req.params.categoryId),
+      _id: { $ne: req.params.blogId },
+    })
+      .populate("category", "name")
+      .limit(req.query.limit)
+      .sort({
+        createdAt: -1,
+      });
+
+    res.status(200).json({
+      blogs,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
     res.status(400).json({
       error,
       success: false,

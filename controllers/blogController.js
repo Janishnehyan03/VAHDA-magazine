@@ -112,8 +112,7 @@ exports.deleteBlogById = async (req, res) => {
 exports.getBlogsByCategory = async (req, res) => {
   try {
     const blogs = await Blog.find({
-      category: ObjectId(req.params.categoryId),
-      _id: { $ne: req.params.blogId },
+      category: ObjectId(req.params.id),
     }).populate("category", "name");
     res.status(200).json({
       blogs,

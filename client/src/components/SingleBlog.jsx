@@ -99,7 +99,10 @@ function SingleBlog() {
             </div>
           </div>
         </div>
-      {post ? (
+        {/* black line  */} 
+        <div className="w-full border-b border-gray-500 mt-8"></div>
+
+      {post.category ? (
         <Related blogId={id} categoryId={post.category && post.category._id} />
       ) : null}
       </div>

@@ -6,7 +6,7 @@ import Axios from "../Axios";
 function Related({ categoryId, blogId }) {
   const [related, setRelated] = useState([]);
   const getRelated = async () => {
-    const { data } = await Axios.get(
+    const { data } = await Axios.post(
       `/blogs/find-exeption/${categoryId}/${blogId}?limit=3`
     );
     setRelated(data.blogs);

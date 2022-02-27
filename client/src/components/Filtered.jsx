@@ -14,6 +14,7 @@ function Filtered() {
   };
   const getPosts = async () => {
     let { data } = await Axios.get("/blogs/category/" + id);
+    console.log(data);
     setPosts(data.blogs);
   };
 

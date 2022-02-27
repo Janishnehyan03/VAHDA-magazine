@@ -19,40 +19,20 @@ function AddCategory() {
   };
   const deleteCategory = async (id, name) => {
     try {
-      const response = await Axios.delete(`/categories/${id}`);
-      if (response.data.success) {
-        toast.success(`${name} deleted successfully`, {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        getCategories();
-      } else {
-        toast.error(`${name} could not be deleted`, {
-          position: "top-center",
-          autoClose: false,
-        });
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const editCategory = async (id) => {
-    try {
-      const response = await Axios.patch(`/categories/${id}`, {
-        name: name,
-      });
-      if (response.data.success) {
-        toast.success(`${name} edited successfully`, {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        getCategories();
-      } else {
-        toast.error(`${name} could not be edited`, {
-          position: "top-center",
-          autoClose: false,
-        });
+      if (window.confirm("do you want to delete this item?")) {
+        const response = await Axios.delete(`/categories/${id}`);
+        if (response.data.success) {
+          toast.success(`${name} deleted successfully`, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+          getCategories();
+        } else {
+          toast.error(`${name} could not be deleted`, {
+            position: "top-center",
+            autoClose: false,
+          });
+        }
       }
     } catch (error) {
       console.log(error.response);
@@ -172,16 +152,7 @@ function AddCategory() {
               {categories.map((category) => (
                 <tr key={category._id}>
                   <td className="border px-4 py-2">{category.name}</td>
-                  <td className="border px-4 py-2">
-                    <button
-                      onClick={() => {
-                        editCategory(category._id);
-                      }}
-                      className="inline-block px-3 py-1 text-sm font-medium  text-white bg-blue-600 hover:bg-white hover:text-blue-700 transition border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                    >
-                      Edit
-                    </button>
-                  </td>
+
                   <td className="border px-4 py-2">
                     <button
                       onClick={() => {

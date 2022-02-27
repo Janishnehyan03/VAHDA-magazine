@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import Axios from "../Axios";
 import { UserContext } from "../context/User";
 import { useContext } from "react";
+import Logo from "../logo.png";
+import TextLogo from "../textLogo.png";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,21 +34,19 @@ function Nav() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <NavLink  to={"/"}>
-                <div className="flex">
-                  <img
-                    className="h-8 w-8"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
-                  />
-                  <h1 className="text-2xl font-bold mx-4 text-white">VAHDA</h1>
+              <NavLink to={"/"}>
+                <div className="flex mt-4">
+                  <img className="h-12" src={Logo} alt="Workflow" />
+                  <h1 className="text-2xl font-bold mx-4 text-white">
+                    AL-VAHDA
+                  </h1>
                 </div>
               </NavLink>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4 relative">
                   {user && (
                     <NavLink
-                    activeClassName="text-white bg-gray-900"
+                      activeClassName="text-white bg-gray-900"
                       to={"/dashboard"}
                       className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                     >

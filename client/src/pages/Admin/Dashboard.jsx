@@ -22,7 +22,9 @@ function Dashboard() {
               >
                 Create New Post
               </Link>
-              <p className="text-gray-500 py-10"></p>
+              <p className="text-gray-500 py-10">
+                
+              </p>
               <Link
                 to={"/all-posts"}
                 className="inline-flex p-2 px-4 capitalize transition-colors duration-200 transform  text-white bg-gray-800  hover:text-gray-800 hover:bg-white"

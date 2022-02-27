@@ -87,6 +87,7 @@ exports.updateBlogById = async (req, res) => {
       success: true,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       error,
       success: false,

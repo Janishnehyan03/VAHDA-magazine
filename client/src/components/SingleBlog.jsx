@@ -55,9 +55,7 @@ const Blog = () => {
         </div>
         {related.length > 0 ? (
           <div className="flex flex-col space-y-8 lg:col-span-1">
-            <h1 className="text-gray-600 font-bold">
-              Related Posts 
-            </h1>
+            <h1 className="text-gray-600 font-bold">Related Posts</h1>
             {related.map((post, index) => (
               <div key={index}>
                 <p className="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase">
@@ -68,8 +66,8 @@ const Blog = () => {
                     to={`/post/${post._id}`}
                     className="inline-block text-blue-500 transition-colors duration-200 hover:text-deep-purple-accent-400"
                   >
-                    <img src={post.image} alt="" />
-                    <p className="font-sans text-xl font-extrabold leading-none tracking-tight lg:text-2xl">
+                    <img src={post.image} alt="" className="h-40" />
+                    <p className="font-sans text-xl font-extrabold leading-none tracking-tight lg:text-2xl hover:text-red-500">
                       {post.title}
                     </p>
                   </Link>

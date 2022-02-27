@@ -53,6 +53,12 @@ function AllBlogs() {
                     scope="col"
                     className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                   >
+                    SI.No
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
                     Name
                   </th>
                   <th
@@ -83,6 +89,9 @@ function AllBlogs() {
                 {!loading &&
                   blogs.map((blog, index) => (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {index + 1}
+                      </td>
                       <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {blog.title.substring(0, 20)}
                       </td>

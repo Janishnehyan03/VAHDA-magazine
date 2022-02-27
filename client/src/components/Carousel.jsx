@@ -48,7 +48,7 @@ function Carousel() {
 
             {/* title background with 50% opacity */}
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" />
-            <h1 className="text-white capitalize text-center  py-2 text-3xl font-bold absolute top-1/2 left-1/2 px-8 -translate-x-1/2 -translate-y-1/2">
+            <h1 className="text-white capitalize text-center  py-2 lg:text-3xl w-full lg:font-bold sm:text-base absolute top-1/2 left-1/2 px-8 -translate-x-1/2 -translate-y-1/2">
               {blogs[current] && blogs[current].title}
             </h1>
           </Link>

@@ -48,8 +48,7 @@ function Contact() {
             Contact Us
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-            gentrify.
+           Help us to improve... 
           </p>
         </div>
         <div className="lg:w-1/2 md:w-2/3 mx-auto">

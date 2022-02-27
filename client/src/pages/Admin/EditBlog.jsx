@@ -14,7 +14,7 @@ function EditBlog() {
   const [categories, setCategories] = useState([]);
   const [author, setAuthor] = useState("");
   const [authors, setAuthors] = useState([]);
-  const [authorDetails, setAuthorDetails] = useState([]);
+  const [authorDetails, setAuthorDetails] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
@@ -262,7 +262,40 @@ function EditBlog() {
                       dangerouslySetInnerHTML={{ __html: content }}
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full  shadow-sm sm:text-sm border-gray-300 rounded-md"
                     ></div>
+                    <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                      <h1 className="text-2xl font-bold text-gray-800 text-center">
+                        Html Content Editor
+                      </h1>
+                    </div>
+
+                    <textarea
+                      value={content}
+                      className="form-control block
+        w-full
+        h-56
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      onChange={(e) => setContent(e.target.value)}
+                      rows={3}
+                    />
                   </div>
+                  <a
+                    className="bg-gray-800 text-white font-bold py-2 px-4"
+                    href="/html"
+                    target={'_blank'}
+                  >
+                   Html Editor 
+                  </a>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   {loading ? (

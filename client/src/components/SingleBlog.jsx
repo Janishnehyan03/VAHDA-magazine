@@ -38,6 +38,13 @@ const Blog = () => {
           </p>
           <div className="flex items-center">
             <div>
+              {blog.category && (
+                <Link to={`/category/${blog.category._id}`}>
+                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    {blog.category.name}
+                  </span>
+                </Link>
+              )}
               <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400 py-4">
                 ✒️ {blog.author}
               </p>
@@ -57,30 +64,23 @@ const Blog = () => {
           <div className="flex flex-col space-y-8 lg:col-span-1">
             <h1 className="text-gray-600 font-bold">Related Posts</h1>
             {related.map((post, index) => (
-              <div key={index}>
-                <p className="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase">
-                  {moment(post.createdAt).format("MMMM Do YYYY")}
-                </p>
-                <div className="mb-3">
-                  <Link
-                    to={`/post/${post._id}`}
-                    className="inline-block text-blue-500 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                  >
-                    <img src={post.image} alt="" className="h-40" />
-                    <p className="font-sans text-xl font-extrabold leading-none tracking-tight lg:text-2xl hover:text-red-500">
-                      {post.title}
-                    </p>
-                  </Link>
-                </div>
-
-                <div className="flex items-center">
-                  <div>
-                    <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400">
-                      ✒️ {post.author}
-                    </p>
+              <Link to={`/post/${post._id}`}>
+                <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto hover:border-red-800 transition">
+                  <div className="animate-pulse flex space-x-4">
+                    <img
+                      src={post.image}
+                      alt=""
+                      className="h-32 w-32 rounded-md"
+                    />
+                    <div className="flex-1 space-y-6 py-1">
+                      <h1 className="text-gray-600 font-bold hover:text-red-500">{post.title}</h1>
+                      <div className="space-y-3">
+                        <p className="">✒️ {post.author}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (

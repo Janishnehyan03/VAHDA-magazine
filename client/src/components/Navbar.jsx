@@ -86,7 +86,7 @@ function Nav() {
                     </div>
                     <div
                       onClick={logout}
-                      className="absolute right-2 top-2 bg-red-400 px-6 py-2 rounded-2xl hover:bg-white hover:text-red-400 transition hover:font-semibold cursor-pointer"
+                      className="absolute right-2 top-2 bg-red-800 px-6 py-2 rounded-2xl text-white hover:bg-white hover:text-red-400 transition hover:font-semibold cursor-pointer"
                     >
                       Logout
                     </div>

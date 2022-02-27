@@ -38,7 +38,7 @@ const Blog = () => {
           </p>
           <div className="flex items-center">
             <div>
-              <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400">
+              <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400 py-4">
                 ✒️ {blog.author}
               </p>
             </div>
@@ -55,6 +55,9 @@ const Blog = () => {
         </div>
         {related.length > 0 ? (
           <div className="flex flex-col space-y-8 lg:col-span-1">
+            <h1 className="text-gray-600 font-bold">
+              Related Posts 
+            </h1>
             {related.map((post, index) => (
               <div key={index}>
                 <p className="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase">

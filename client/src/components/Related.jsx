@@ -22,14 +22,10 @@ function Related({ categoryId, blogId }) {
             Related Posts
           </h1>
         </div>
-        <div className="flex flex-wrap -m-4">
+        <div className="m-4">
           {related.map((blog, index) => (
-            <Link
-              to={("/post/", blog._id)}
-              className="p-4 lg:w-1/4 md:w-1/2"
-              key={index}
-            >
-              <div className="h-full flex flex-col items-center text-center">
+            <Link to={("/post/", blog._id)} key={index}>
+              <div className="h-full w-full text-center mx-4">
                 <img
                   alt="img"
                   className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"

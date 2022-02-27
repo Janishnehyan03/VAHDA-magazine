@@ -23,7 +23,8 @@ function CreateHtml() {
         editorClassName="editorClassName"
         placeholder="Enter your content here"
       />
-
+      <div className="bg-black h-2 w-full"></div>
+      <p>{html}</p>
       <div className="text-center mt-10">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

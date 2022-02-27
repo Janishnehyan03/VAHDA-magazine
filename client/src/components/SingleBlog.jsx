@@ -1,96 +1,89 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import moment from "moment";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../Axios";
-import moment from "moment";
-import { UserContext } from "../context/User";
-import { useContext } from "react";
-import Related from "./Related";
+import { CircularProgress } from "@material-ui/core";
 
-function SingleBlog() {
+const Blog = () => {
+  const [blog, setBlog] = useState({});
+  const [related, setRelated] = useState([]);
   const { id } = useParams();
-  const [post, setPost] = useState({});
-  const { user } = useContext(UserContext);
-  const getPost = async () => {
-    const { data } = await Axios.get(`/blogs/${id}`);
-    setPost(data.blog);
+  const getBlog = async () => {
+    let { data } = await Axios.get(`/blogs/${id}`);
+    setBlog(data.blog);
   };
+  const getRelated = async () => {
+    let { data } = await Axios.post(
+      `/blogs/find-exeption/${blog.category._id}/${id}`
+    );
+    setRelated(data.blogs);
+  };
+
   useEffect(() => {
-    getPost();
+    getBlog();
+    getRelated();
   }, [id]);
   return (
-    <section className="text-gray-600 body-font grid grid-cols-6">
-      <div className="container px-5 py-24 mx-auto col-start-1 col-span-4">
-        <div className="mx-auto ">
-          {/* edit button */}
-          {user && (
-            <Link
-              to={`/edit-post/${id}`}
-              className="bg-gray-400 rounded-lg py-2 px-4"
-            >
-              Edit
-            </Link>
-          )}
-          <div className="rounded-lg h-96 overflow-hidden">
-            <img
-              alt="content"
-              className="object-cover object-center h-full w-full"
-              src={post.image}
-            />
-          </div>
-          <p className="text-center text-gray-500 text-xs tracking-widest uppercase my-4">
-            {moment(post.createdAt).format("MMMM Do YYYY")}
+    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="grid gap-10 row-gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <img src={blog.image} alt="img" className="my-4" />
+          <p className="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase">
+            {moment(blog.createdAt).format("MMMM Do YYYY")}
           </p>
-          <div class="px-6 pt-4 pb-2">
-            {post.category && (
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 ">
-                <Link to={`/category/${post.category._id}`}>
-                  {post.category.name}
-                </Link>
-              </span>
-            )}
-          </div>
-          <div className="mt-10">
-            <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-              {/* <div className="flex flex-col items-center text-center justify-center">
-                <h2 className="font-medium title-font mt-4 text-gray-500 text-lg">
-                  {post.author ? post.author : ""}
-                </h2>
-                <div className="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" />
-                <p className="text-base">
-                  {post.author ? post.authorDetails : ""}
-                </p>
-              </div> */}
-            </div>
-            <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-              <h1 className="text-2xl font-medium title-font mb-text-5 text-black mb-8 text-center">
-                {post.title}
-              </h1>
-
-              {post.category && post.category.name === "poems" ? (
-                <div className="flex flex-col sm:flex-row justify-center items-center text-center">
-                  <p
-                    className="text-gray-600"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  ></p>
-                </div>
-              ) : (
-                <div className="flex flex-col sm:flex-row justify-center items-center">
-                  <p
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                    className="text-gray-600"
-                  ></p>
-                </div>
-              )}
+          <div className="flex items-center">
+            <div>
+              <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                ✒️ {blog.author}
+              </p>
             </div>
           </div>
+          <div className="mb-3">
+            <p className="font-sans text-xl font-extrabold leading-none tracking-tight lg:text-4xl xl:text-5xl">
+              {blog.title}
+            </p>
+          </div>
+          <div
+            className="text-gray-600"
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          ></div>
         </div>
-      </div>
-      {post && (
-        <Related blogId={id} categoryId={post.category && post.category._id} />
-      )}
-    </section>
-  );
-}
+        {related.length > 0 ? (
+          <div className="flex flex-col space-y-8 lg:col-span-1">
+            {related.map((post, index) => (
+              <div key={index}>
+                <p className="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase">
+                  {moment(post.createdAt).format("MMMM Do YYYY")}
+                </p>
+                <div className="mb-3">
+                  <Link
+                    to={`/post/${post._id}`}
+                    className="inline-block text-blue-500 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                  >
+                    <img src={post.image} alt="" />
+                    <p className="font-sans text-xl font-extrabold leading-none tracking-tight lg:text-2xl">
+                      {post.title}
+                    </p>
+                  </Link>
+                </div>
 
-export default SingleBlog;
+                <div className="flex items-center">
+                  <div>
+                    <p className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                      ✒️ {post.author}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <CircularProgress />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Blog;

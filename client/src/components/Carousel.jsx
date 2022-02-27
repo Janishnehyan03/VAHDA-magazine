@@ -41,11 +41,7 @@ function Carousel() {
         <div className="duration-200 ease-linear absolute inset-0 transition-all transform">
           <Link to={`/post/${blogs[current] && blogs[current]._id}`}>
             <img
-              src={
-                blogs[current]
-                  ? blogs[current].image
-                  : "https://flowbite.com/docs/images/carousel/carousel-3.svg"
-              }
+              src={blogs[current] ? blogs[current].image : ""}
               className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 ease-linear"
               alt={blogs[current] && blogs[current].title}
             />

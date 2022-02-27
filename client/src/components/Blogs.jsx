@@ -13,7 +13,7 @@ function Blogs() {
   const getBlogs = async () => {
     setLoading(true);
     try {
-      let res = await Axios.get("/blogs?skip=5");
+      let res = await Axios.get("/blogs");
       if (res.data.success) {
         setBlogs(res.data.blogs);
         setLoading(false);

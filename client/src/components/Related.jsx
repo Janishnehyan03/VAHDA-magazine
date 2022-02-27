@@ -15,39 +15,38 @@ function Related({ categoryId, blogId }) {
     getRelated();
   }, [categoryId, blogId]);
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-col text-center w-full mb-20">
-          <h1 className="text-2xl font-medium title-font mb-4 text-gray-900">
-            Related Posts
-          </h1>
-        </div>
-        <div className="m-4">
-          {related.map((blog, index) => (
-            <Link to={("/post/", blog._id)} key={index}>
-              <div className="h-full w-full text-center mx-4">
-                <img
-                  alt="img"
-                  className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
-                  src={blog.image}
-                />
-                <div className="w-full">
-                  <h2 className="title-font font-medium text-lg text-gray-900">
-                    {blog.title.length > 30
-                      ? blog.title.slice(0, 20) + "..."
-                      : blog.title}
-                  </h2>
-                  <h3 className="text-gray-300 mb-3">
-                    {moment(blog.createdAt).format("MMMM Do YYYY")}
-                  </h3>
-                  <p className="mb-4">{blog.author}</p>
-                </div>
+    <div className="col-end-7 col-span-2 mt-24">
+      <h1 className="text-2xl font-bold my-4">
+        Related Posts 
+      </h1>
+      {related.map((blog, index) => (
+        <>
+          <div className="md:flex">
+            <div className="md:shrink-0">
+              <img
+                className="object-cover md:h-40 md:w-40"
+                src={blog.image}
+                alt="img"
+              />
+            </div>
+            <div className="p-8">
+              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+               ✒️ {blog.author}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
+              <a
+                href="#"
+                className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+              >
+                {blog.title}
+              </a>
+              <p className="mt-2 text-slate-500">
+                {moment(blog.createdAt).format("MMMM Do YYYY")}
+              </p>
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
   );
 }
 

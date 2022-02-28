@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CreateHtml from "./components/CreateHtml";
 import Filtered from "./components/Filtered";
 import Footer from "./components/Footer";
+import LaunchBtn from "./components/LaunchBtn";
 import Nav from "./components/Navbar";
 import SingleBlog from "./components/SingleBlog";
 import Videos from "./components/Videos";
@@ -30,6 +31,7 @@ function App() {
         <Nav navOpen={navOpen} setNavOpen={setNavOpen} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/launch" component={LaunchBtn} />
           <Route path="/contact" component={Contact} />
           <Route exact path="/html" component={CreateHtml} />
           <Route path="/create-post" component={AddBlog} />

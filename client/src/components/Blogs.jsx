@@ -40,25 +40,25 @@ function Blogs() {
               className="rounded overflow-hidden shadow-lg sm:relative md:relative"
             >
               <img
-                className="w-full h-64 object-cover object-center"
+                className="w-full h-40 object-cover object-center"
                 src={blog.image}
                 alt="content"
               />
               <p className="text-center text-gray-500 text-xs tracking-widest uppercase my-4">
                 {moment(blog.createdAt).format("MMMM Do YYYY")}
               </p>
-              <div class="px-6 pt-4 pb-2">
+              <div class="px-6">
                 {blog.category && (
                   <Link to={`/category/${blog.category._id}`}>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    <span class="inline-block bg-secondary rounded-sm px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
                       {blog.category.name}
                     </span>
                   </Link>
                 )}
               </div>
 
-              <div className="px-6 py-4">
-                <div className="text-xl mb-2 text-center font-semibold text-gray-600">
+              <div className="px-6">
+                <div className="text-xl mb-2 text-center font-semibold text-gray-600 hover:text-secondary">
                   {blog.title.length > 100
                     ? blog.title.substring(0, 100) + "  ..."
                     : blog.title}
@@ -68,7 +68,7 @@ function Blogs() {
               {/* author name on left of card */}
               <div class="px-6 pt-4 pb-2">
                 {blog.author && (
-                  <span class="inline-block text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  <span class="inline-block text-sm font-sm text-gray-500 mr-2 mb-2">
                     ✒️ {blog.author}
                   </span>
                 )}

@@ -48,7 +48,7 @@ function Nav() {
                     <NavLink
                       activeClassName="text-white bg-gray-900"
                       to={"/dashboard"}
-                      className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                     >
                       Dashboard
                     </NavLink>
@@ -59,7 +59,7 @@ function Nav() {
                       to={"/category/" + category._id}
                       key={category._id}
                       activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                     >
                       {category.name}
                     </NavLink>
@@ -67,14 +67,14 @@ function Nav() {
                   <NavLink
                     activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                     to={"/videos/"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    videos
+                    Videos
                   </NavLink>
                   <NavLink
                     activeClassName="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                     to={"/contact/"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
                     Contact us
                   </NavLink>
@@ -164,18 +164,11 @@ function Nav() {
                 className="px-2 pt-2 pb-3 space-y-1 sm:px-3"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <Link
-                  to={"/dashboard"}
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </Link>
-
                 {categories.map((category) => (
                   <Link
                     to={`/category/${category._id}`}
                     key={category._id}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase"
                   >
                     {category.name}
                   </Link>
@@ -192,18 +185,6 @@ function Nav() {
                 >
                   Contact us
                 </Link>
-                {user ? (
-                  <Link className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    Hi, {user.name}
-                  </Link>
-                ) : (
-                  <Link
-                    to={"/login"}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Login
-                  </Link>
-                )}
               </div>
             </div>
           )}

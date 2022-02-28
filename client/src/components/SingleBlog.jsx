@@ -73,7 +73,9 @@ const Blog = () => {
                       className="h-32 w-32 rounded-md"
                     />
                     <div className="flex-1 space-y-6 py-1">
-                      <h1 className="text-gray-600 font-bold hover:text-red-500">{post.title}</h1>
+                      <h1 className="text-gray-600 font-bold hover:text-red-500">
+                        {post.title}
+                      </h1>
                       <div className="space-y-3">
                         <p className="">✒️ {post.author}</p>
                       </div>
@@ -84,7 +86,9 @@ const Blog = () => {
             ))}
           </div>
         ) : (
-          <CircularProgress />
+          <div className="flex flex-col space-y-8 lg:col-span-1">
+            <h1 className="text-gray-600 font-bold">No Related Posts</h1>
+          </div>
         )}
       </div>
     </div>

@@ -43,15 +43,15 @@ function Filtered() {
                     src={post.image}
                   />
                 </div>
-                <h2 className="text-xl font-medium title-font text-gray-900 mt-5">
+                <h2 className="text-xl font-medium title-font text-gray-900 mt-5 text-center">
                   {post.title.length > 50
                     ? post.title.substring(0, 50) + "..."
                     : post.title}
                 </h2>
-                <div class="px-6 pt-4 pb-2">
-                  <span class="inline-block text-sm font-semibold text-gray-400 mr-2 mb-2">
-                    ✒️ {post.author}
-                  </span>
+                <div class="px-6">
+                  <h2 className="font-sm text-gray-400 mt-5 text-center">
+                   ✒️ {post.author}
+                  </h2>
                 </div>
 
                 <div className="text-indigo-500 inline-flex items-center mt-3">

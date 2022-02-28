@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
 import moment from "moment";
+import LoadingComponent from "./Loading";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -29,7 +30,7 @@ function Blogs() {
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
       {loading ? (
         <>
-          <CircularProgress />
+          <LoadingComponent />
         </>
       ) : (
         <>
@@ -50,7 +51,7 @@ function Blogs() {
               <div class="px-6">
                 {blog.category && (
                   <Link to={`/category/${blog.category._id}`}>
-                    <span class="inline-block bg-secondary rounded-sm px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
+                    <span class="inline-block bg-violet-800 rounded-sm px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 uppercase">
                       {blog.category.name}
                     </span>
                   </Link>
@@ -66,9 +67,9 @@ function Blogs() {
               </div>
 
               {/* author name on left of card */}
-              <div class="px-6 pt-4 pb-2">
+              <div class="px-6 pt-4 pb-2 text-center">
                 {blog.author && (
-                  <span class="inline-block text-sm font-sm text-gray-500 mr-2 mb-2">
+                  <span class="inline-block text-sm font-sm text-gray-500 mr-2 mb-2 ">
                     ✒️ {blog.author}
                   </span>
                 )}
